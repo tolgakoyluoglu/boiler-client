@@ -1,32 +1,27 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <v-header />
+    <div class="page-body">
+      <router-view />
     </div>
-    <router-view/>
+    <v-footer />
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import VHeader from '@/components/VHeader'
+import VFooter from '@/components/VFooter'
 
-#nav {
-  padding: 30px;
+export default {
+  name: 'app',
+  components: {
+    VHeader,
+    VFooter
+  },
+  created () {
+    if (this.$store.state.auth.user === undefined) {
+      this.$store.dispatch('AUTHENTICATE')
+    }
+  }
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+</script>
