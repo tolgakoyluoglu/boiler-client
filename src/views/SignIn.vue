@@ -26,7 +26,7 @@
           <router-link to="/reset-password">Forgot your password?</router-link>
         </p>
         <div class="text-right">
-          <v-button theme="primary">Sign in</v-button>
+          <v-button class="primary">Sign in</v-button>
         </div>
         <p>Not a member? <router-link to="/sign-up">Sign up</router-link>.</p>
       </form>

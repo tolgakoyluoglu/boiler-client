@@ -17,6 +17,9 @@ export default {
   vertical-align: top;
   border: 1px solid #ddd;
   line-height: 1;
+  font-weight: bold;
+  border-radius: 4px;
+  outline: none;
 
   &:not(:last-child) {
     margin-bottom: 1rem;
@@ -26,14 +29,17 @@ export default {
   &.md {
     padding: var(--button-padding-md);
     font-size: var(--input-font-md);
+    height: var(--input-height-lg)
   }
   &.sm {
     padding: var(--button-padding-sm);
     font-size: var(--input-font-sm);
+    height: var(--input-height-md)
   }
   &.lg {
     padding: var(--button-padding-lg);
     font-size: var(--input-font-lg);
+    height: var(--input-height-lg)
   }
 
   &,
@@ -47,10 +53,19 @@ export default {
   }
   &.primary {
     border-color: var(--color-primary);
-    background: var(--color-primary);
+    background-image: linear-gradient(
+      135deg,
+      var(--color-primary20),
+      var(--color-primary)
+    );
+    box-shadow: inset 0px 1px 0px 0px var(--color-primary20);
     color: #fff;
     &:hover {
-      background: var(--color-primary-hover);
+      background-image: linear-gradient(
+        135deg,
+        var(--color-primary20),
+        var(--color-primary10)
+      );
     }
   }
   &.success {

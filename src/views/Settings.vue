@@ -1,54 +1,60 @@
 <template>
   <div class="settings">
     <div class="container content">
-      <form class="card box-shadow-1" @submit.prevent="onSubmitEmail">
-        <h3>Change e-mail</h3>
-        <div v-if="!$store.state.auth.user.emailVerified" style="margin-bottom: 1rem;">
-          <p>You haven't verified your email. Please check your inbox.</p>
-          <div class="text-right">
-            <v-button @click.prevent="requestEmailVerification">Send a new link</v-button>
+      <div class="wrapper box-shadow-1">
+        <form class="card" @submit.prevent="onSubmitEmail">
+          <h3>Change e-mail</h3>
+          <div
+            v-if="!$store.state.auth.user.emailVerified"
+            style="margin-bottom: 1rem;"
+          >
+            <p>You haven't verified your email. Please check your inbox.</p>
+            <div class="text-right">
+              <v-button
+                class="primary"
+                @click.prevent="requestEmailVerification"
+                >Send a new link</v-button
+              >
+            </div>
           </div>
-        </div>
-        <v-input
-          v-model="email"
-          placeholder="E-mail"
-        />
-        <v-input
-          type="password"
-          v-model="passwordEmail"
-          placeholder="Password"
-        />
-        <div class="text-right">
-          <v-button>Save</v-button>
-        </div>
-      </form>
+          <v-input v-model="email" placeholder="E-mail" />
+          <v-input
+            type="password"
+            v-model="passwordEmail"
+            placeholder="Password"
+          />
+          <div class="text-right">
+            <v-button class="primary">Save</v-button>
+          </div>
+        </form>
 
-      <form class="card box-shadow-1" @submit.prevent="onSubmitPassword">
-        <h3>Change password</h3>
-        <v-input
-          type="password"
-          v-model="passwordPassword"
-          placeholder="Password"
-        />
-        <v-input
-          type="password"
-          v-model="newPassword"
-          placeholder="New password"
-        />
-        <v-input
-          type="password"
-          v-model="newPasswordRepeat"
-          placeholder="Repeat new password"
-        />
-        <div class="text-right">
-          <v-button>Save</v-button>
-        </div>
-      </form>
-      <div class="card box-shadow-1">
-        <h3>Delete account</h3>
-        <p>Delete my account.</p>
-        <div class="text-right">
-          <v-button>Delete</v-button>
+        <form class="card" @submit.prevent="onSubmitPassword">
+          <h3>Change password</h3>
+          <v-input
+            type="password"
+            v-model="passwordPassword"
+            placeholder="Password"
+          />
+          <v-input
+            type="password"
+            v-model="newPassword"
+            placeholder="New password"
+          />
+          <v-input
+            type="password"
+            v-model="newPasswordRepeat"
+            placeholder="Repeat new password"
+          />
+          <div class="text-right">
+            <v-button class="primary">Save</v-button>
+          </div>
+        </form>
+        <div class="card">
+          <h3>Delete account</h3>
+          <p>Delete my account.</p>
+          <div class="text-right">
+            <v-button class="error">Delete</v-button>
+          </div>
         </div>
       </div>
     </div>
@@ -102,7 +108,11 @@ export default {
       if (!passwordPassword || !newPassword || !newPasswordRepeat) return
 
       api
-        .put('/users/update-password', { password: passwordPassword, newPassword, newPasswordRepeat })
+        .put('/users/update-password', {
+          password: passwordPassword,
+          newPassword,
+          newPasswordRepeat
+        })
         .then(response => {
           this.passwordPassword = null
           this.newPassword = null
@@ -125,6 +135,12 @@ export default {
 
 <style lang="postcss" scoped>
 .settings {
+  .wrapper {
+    max-width: 450px;
+    width: 100%;
+    margin: auto;
+    padding: 1rem;
+  }
   .card {
     display: block;
     margin: 0 auto 1rem auto;

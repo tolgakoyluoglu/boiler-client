@@ -32,7 +32,7 @@
           {{ errors.error }}
         </p>
         <div class="text-right">
-          <v-button theme="primary">Sign up</v-button>
+          <v-button class="primary">Sign up</v-button>
         </div>
         <p>
           Already a member? <router-link to="/sign-in">Sign in</router-link>.
