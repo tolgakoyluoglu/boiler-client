@@ -26,7 +26,7 @@ export default {
 
 <style lang="postcss" scoped>
 .v-footer {
-  background: #333;
+  background: #24292e;
   .container {
     display: flex;
     justify-content: space-between;
