@@ -2,11 +2,12 @@
   <header class="v-header page-header box-shadow-1">
     <div class="container content">
       <ul class="items">
-        <li @click="showSidebar = !showSidebar">
-          <router-link to="/">SiteName</router-link>
+        <li>
+          <i v-if="this.$store.state.auth.user" class="fas fa-bars" @click="toggleSidebar" />
+          <router-link to="/" class="title">Sitename</router-link>
         </li>
       </ul>
-      <ul v-if="!$store.state.auth.user">
+      <ul class="items" v-if="!$store.state.auth.user">
         <li>
           <router-link to="/sign-in">Sign in</router-link>
         </li>
@@ -25,17 +26,17 @@
         <li
           key="close"
           v-show="showSidebar"
-          @click="showSidebar = !showSidebar">
-          Close
+          @click="toggleSidebar">
+          <i class="fas fa-times" />
         </li>
-        <li key="1" v-show="showSidebar" @click="showSidebar = !showSidebar">
-          Home
+        <li key="1" v-show="showSidebar">
+          <router-link to="/">Home</router-link>
         </li>
-        <li key="2" v-show="showSidebar" @click="showSidebar = !showSidebar">
-          About
+        <li key="2" v-show="showSidebar">
+          <router-link to="/settings" class="match">Settings</router-link>
         </li>
-        <li key="3" v-show="showSidebar" @click="showSidebar = !showSidebar">
-          Settings
+        <li key="3" v-show="showSidebar">
+          <router-link to="/about" class="match">About</router-link>
         </li>
         <li class="empty" key="sidebar" v-show="showSidebar"></li>
       </ul>
@@ -50,24 +51,38 @@ export default {
     return {
       showSidebar: false
     }
+  },
+  methods: {
+    toggleSidebar () {
+      this.showSidebar = !this.showSidebar
+    }
   }
 }
 </script>
 
 <style lang="postcss" scoped>
+@import url('https://kit.fontawesome.com/f43ec197c1.js');
 .v-header {
   background: #24292e;
-
+  padding: 0 30px 0 30px;
   .container {
     display: flex;
     justify-content: space-between;
   }
-
   .items {
     display: flex;
     list-style: none;
     li:not(:last-child) {
       margin-right: 1rem;
+    }
+    i {
+      color: #fff;
+      margin-right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .title {
+      font-size: 20px;
     }
   }
   a {
@@ -82,17 +97,20 @@ export default {
 }
 .sidebar {
   ul {
-    width: 0;
+    width: 100px;
     position: absolute;
-    top: 0;
     left: -10px;
     padding: 0;
     margin: 0;
-    height: 100vh;
+    height: 85vh;
     list-style: none;
+    background-color: #fff;
+    transform: translate3d(0, 0, 0);
     &.show {
-      width: 180px;
+      z-index: 999;
+      width: 280px;
       transition: all 0.3s ease-in-out;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 22px rgba(0, 0, 0, 0.24)
     }
     li {
       cursor: pointer;
@@ -100,9 +118,16 @@ export default {
       justify-content: center;
       align-items: center;
       height: 59px;
-      border-bottom: 1px solid #555;
-      background-color: #24292e;
-      color: #fff;
+      background-color: #fff;
+      color: #24292e;
+      font-size: 24px;
+      a {
+        color: #24292e;
+            &.match.router-link-active,
+    &.router-link-exact-active {
+      font-weight: bold;
+    }
+      }
     }
     li:last-child {
       height: calc(100% - 310px);
